@@ -72,7 +72,9 @@ resource "aws_ecs_capacity_provider" "prov1" {
 module "hello_world" {
   source = "./service-hello-world"
 
-  cluster_id = module.ecs.this_ecs_cluster_id
+  cluster_id      = module.ecs.this_ecs_cluster_id
+  subnets         = module.vpc.public_subnets
+  security_groups = [module.vpc.default_security_group_id]
 }
 
 #----- ECS  Resources--------
